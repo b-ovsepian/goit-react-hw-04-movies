@@ -1,19 +1,13 @@
-import React, { useState, useEffect } from "react";
-import {
-  useHistory,
-  useLocation,
-  useParams,
-  useRouteMatch,
-} from "react-router-dom";
+import React, { useState, useEffect, Suspense } from "react";
+import { singleRoutes } from "../../routes";
+import { useHistory, useLocation, useParams } from "react-router-dom";
 import { getMoviesId } from "../../Services/Services";
-import Loader from "../Loader/Loader";
-import Error from "../Error/Error";
+import Loader from "../../Components/Loader/Loader";
+import Error from "../../Components/Error/Error";
 import { Switch, Route, NavLink } from "react-router-dom";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Styles from "./SingleMovie.module.css";
-import Cast from "../Cast/Cast";
-import Reviews from "../Reviews/Reviews";
 
 const SingleMovie = () => {
   const [movie, setMovie] = useState("");
@@ -23,7 +17,6 @@ const SingleMovie = () => {
   const location = useLocation();
   const history = useHistory();
   const params = useParams().id;
-  const match = useRouteMatch();
 
   useEffect(() => {
     setLoader(true);
@@ -38,7 +31,11 @@ const SingleMovie = () => {
   }, []);
 
   const goBack = () => {
-    history.goBack();
+    const { state } = location;
+    if (state && state.from) {
+      return history.push(state.from);
+    }
+    history.push("/");
   };
 
   const {
@@ -108,10 +105,13 @@ const SingleMovie = () => {
               </NavLink>
             </Toolbar>
           </AppBar>
-          <Switch>
-            <Route exact path="/movies/:id/cast" component={Cast}></Route>
-            <Route exact path="/movies/:id/reviews" component={Reviews}></Route>
-          </Switch>
+          <Suspense fallback={<Loader />}>
+            <Switch>
+              {singleRoutes.map((route) => (
+                <Route key={route.path} {...route} />
+              ))}
+            </Switch>
+          </Suspense>
         </div>
       )}
     </>

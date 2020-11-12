@@ -1,17 +1,20 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Styles from "./List.module.css";
 
 const List = ({ movies }) => {
+  const location = useLocation();
+
   return (
     <ul className={Styles.list}>
       {movies.map((movie) => (
         <li key={movie.id} className={Styles.item}>
-          <NavLink
+          <Link
             className={Styles.link}
-            to={`/movies/${movie.id}`}
-            // className={Styles.link}
-            // activeClassName={Styles.active}
+            to={{
+              pathname: `/movies/${movie.id}`,
+              state: { from: location },
+            }}
           >
             <img
               className={Styles.image}
@@ -24,7 +27,7 @@ const List = ({ movies }) => {
               width="400"
             />
             {movie.title || movie.name}
-          </NavLink>
+          </Link>
         </li>
       ))}
     </ul>

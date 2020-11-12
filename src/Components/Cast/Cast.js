@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 import Loader from "../Loader/Loader";
 import Error from "../Error/Error";
@@ -11,6 +11,9 @@ const Cast = () => {
   const [error, setError] = useState("");
 
   const params = useParams().id;
+  const myRef = useRef(null);
+
+  const executeScroll = () => myRef.current.scrollIntoView();
 
   useEffect(() => {
     setLoader(true);
@@ -21,6 +24,7 @@ const Cast = () => {
       })
       .finally(() => {
         setLoader(false);
+        executeScroll();
       });
   }, []);
 
@@ -33,7 +37,7 @@ const Cast = () => {
         </Error>
       )}
       {!loader && !error && (
-        <ul className={Styles.list}>
+        <ul className={Styles.list} ref={myRef}>
           {cast &&
             cast.map((actor) => (
               <li className={Styles.item} key={actor.cast_id}>

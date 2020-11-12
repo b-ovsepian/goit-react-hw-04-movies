@@ -1,0 +1,14 @@
+.list {
+  list-style: none;
+}
+.item {
+  min-width: 280px;
+  padding: 10px;
+  border-radius: 4px;
+}
+.title {
+  font-size: 22px;
+}
+.text {
+  padding: 10px;
+}

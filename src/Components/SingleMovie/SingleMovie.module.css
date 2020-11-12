@@ -1,0 +1,45 @@
+.SingleMovie {
+  padding: 20px;
+}
+.movieBox {
+  display: flex;
+  flex-wrap: nowrap;
+  margin-bottom: 20px;
+}
+.movieInfo {
+  margin-left: 30px;
+}
+.movieTitle {
+  margin-top: 0;
+  margin-bottom: 15px;
+}
+.img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+.link {
+  color: white;
+  text-decoration: none;
+  text-transform: uppercase;
+  padding: 20px;
+  font-weight: 700;
+}
+.activeLink {
+  color: palevioletred;
+}
+.btn {
+  margin-bottom: 20px;
+
+  display: block;
+  content: "";
+  width: 33px;
+  height: 33px;
+
+  border: none;
+  background-color: transparent;
+
+  background-image: url("./images//image.png");
+  background-size: 33px;
+  background-repeat: no-repeat;
+}

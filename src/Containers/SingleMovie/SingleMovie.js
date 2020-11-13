@@ -88,7 +88,10 @@ const SingleMovie = () => {
           <AppBar position="static">
             <Toolbar variant="dense">
               <NavLink
-                to={`/movies/${params}/cast`}
+                to={{
+                  pathname: `/movies/${params}/cast`,
+                  state: { ...location.state },
+                }}
                 replace
                 className={Styles.link}
                 activeClassName={Styles.activeLink}
@@ -96,7 +99,10 @@ const SingleMovie = () => {
                 Cast
               </NavLink>
               <NavLink
-                to={`/movies/${params}/reviews`}
+                to={{
+                  pathname: `/movies/${params}/reviews`,
+                  state: { ...location.state },
+                }}
                 replace
                 className={Styles.link}
                 activeClassName={Styles.activeLink}

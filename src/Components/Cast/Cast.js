@@ -38,7 +38,7 @@ const Cast = () => {
       )}
       {!loader && !error && (
         <ul className={Styles.list} ref={myRef}>
-          {cast &&
+          {cast.length > 0 ? (
             cast.map((actor) => (
               <li className={Styles.item} key={actor.cast_id}>
                 <img
@@ -57,7 +57,12 @@ const Cast = () => {
                   </span>
                 )}
               </li>
-            ))}
+            ))
+          ) : (
+            <li className={Styles.text}>
+              We do not have any actors for this movie.
+            </li>
+          )}
         </ul>
       )}
     </>

@@ -9,7 +9,9 @@ const Form = ({ search, setSearch, onHandlerSearch, getMovies }) => {
   const submitHandler = (e) => {
     e.preventDefault();
     getMovies(search);
-    history.push({ ...location, search: `?movie=${search}` });
+    if (search) {
+      history.push({ ...location, search: `?movie=${search}` });
+    }
     setSearch("");
   };
 
